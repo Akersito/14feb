@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mi Amor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffe4e1;
+            color: #d63447;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .hidden {
+            display: none;
+        }
+        button {
+            background-color: #d63447;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #a52a3c;
+        }
+        .response-buttons {
+            margin-top: 20px;
+        }
+        .heart {
+            position: absolute;
+            font-size: 24px;
+            color: red;
+            animation: floatUp 5s linear infinite;
+        }
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-200px);
+            }
+        }
+        #full-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        #full-image img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hola mi niña ❤️</h1>
+        <p>Quería hacerte una pregunta.</p>
+        <button onclick="showMessage()">Haz clic aquí</button>
+        
+        <div id="message" class="hidden">
+            <h2>Eres lo mejor que me ha pasado 💖</h2>
+            <p>Gracias por ser tan increíble. Me haces feliz todos los días.</p>
+            <p>¿Quieres ser mi San Valentine? 😘</p>
+            <div class="response-buttons">
+                <button onclick="showResponse('Sí')">Sí 💕</button>
+                <button onclick="showResponse('No')">No 😢</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="full-image" onclick="hideImage()">
+        <img src="https://raw.githubusercontent.com/Akersito/14feb/main/gif.gif" alt="GIF especial">
+    </div>
+    
+    <script>
+        function showMessage() {
+            document.getElementById('message').classList.remove('hidden');
+        }
+        function showResponse(answer) {
+            if (answer === 'Sí') {
+                setInterval(createHearts, 100);
+                showPopup("¡Gracias por aceptar! ❤️ Eres mi persona favorita en el mundo. Te amo mucho mi chamaca cachetona 😘");
+            } else {
+                setTimeout(() => {
+                    alert('Vamos, dime que sí 😘');
+                }, 2000);
+            }
+        }
+        function createHearts() {
+            let heart = document.createElement("div");
+            heart.innerHTML = "❤️";
+            heart.classList.add("heart");
+            heart.style.left = Math.random() * window.innerWidth + "px";
+            heart.style.top = Math.random() * window.innerHeight + "px";
+            heart.style.fontSize = Math.random() * 20 + 20 + "px";
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+        function showPopup(message) {
+            let popup = document.createElement("div");
+            popup.style.position = "fixed";
+            popup.style.top = "50%";
+            popup.style.left = "50%";
+            popup.style.transform = "translate(-50%, -50%)";
+            popup.style.backgroundColor = "white";
+            popup.style.padding = "20px";
+            popup.style.border = "2px solid #d63447";
+            popup.style.borderRadius = "10px";
+            popup.style.boxShadow = "0px 0px 10px rgba(0, 0, 0, 0.1)";
+            popup.style.zIndex = "1000";
+            popup.innerHTML = `<p>${message}</p><button onclick="closePopup(this)">Cerrar</button>`;
+            document.body.appendChild(popup);
+        }
+        function closePopup(button) {
+            button.parentNode.remove();
+            document.getElementById("full-image").style.display = "flex";
+        }
+        function hideImage() {
+            document.getElementById("full-image").style.display = "none";
+        }
+    </script>
+</body>
+</html>
